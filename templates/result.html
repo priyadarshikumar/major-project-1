@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Valuation Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container result-container">
+        <header>
+            <h1>Property Valuation Results</h1>
+        </header>
+
+        <div class="results-grid">
+            <div class="card prediction-card">
+                <h2>Estimated Price</h2>
+                <div class="price">{{ predicted_price }}</div>
+                <div class="confidence">
+                    Confidence: {{ insights.price_confidence }}
+                </div>
+            </div>
+
+            <div class="card details-card">
+                <h2>Property Details</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="label">Location</span>
+                        <span class="value">{{ location }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Square Footage</span>
+                        <span class="value">{{ square_footage }} sq ft</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Price per sq ft</span>
+                        <span class="value">{{ price_per_sqft }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Bedrooms</span>
+                        <span class="value">{{ bedrooms }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Bathrooms</span>
+                        <span class="value">{{ bathrooms }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Year Built</span>
+                        <span class="value">{{ year_built }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card market-card">
+                <h2>Market Analysis</h2>
+                <p class="market-trend">{{ insights.market_trend }}</p>
+                
+                <h3>Similar Properties</h3>
+                <ul class="similar-properties">
+                    {% for price in insights.similar_properties %}
+                    <li>{{ price }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="{{ url_for('index') }}" class="button">New Prediction</a>
+        </div>
+
+        <footer>
+            <p>© 2024 Smart House Price Predictor | Made with ❤️ by Your Team</p>
+        </footer>
+    </div>
+</body>
+</html> 
